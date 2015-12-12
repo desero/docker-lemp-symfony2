@@ -40,8 +40,7 @@ RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-VOLUME ["/var/www", "/var/log/nginx/"]
-
+VOLUME /var/www
 WORKDIR /var/www
 
 RUN usermod -u 1000 www-data
@@ -50,7 +49,9 @@ RUN usermod -u 1000 www-data
 
 CMD ["/sbin/my_init"]
 
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
+CMD service nginx start
+CMD service php5-fpm start
 
 EXPOSE 80
 EXPOSE 443
