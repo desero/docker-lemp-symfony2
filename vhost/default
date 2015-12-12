@@ -5,7 +5,6 @@ server {
     server_name localhost;
 
     root /var/www/web;
-    index index.html index.htm index.php;
 
     location / {
         try_files $uri /app.php$is_args$args;
@@ -23,4 +22,7 @@ server {
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param HTTPS off;
     }
+
+    error_log /var/log/default.www.error.log;
+    access_log /var/log/default.www.access.log;
 }

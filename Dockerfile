@@ -39,8 +39,6 @@ ADD etc/my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
 RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN service nginx start
-RUN service php5-fpm start
 
 VOLUME ["/var/www", "/var/log/nginx/"]
 
