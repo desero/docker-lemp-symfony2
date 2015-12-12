@@ -48,8 +48,9 @@ RUN usermod -u 1000 www-data
 # RUN chown -R www-data:www-data /var/www/app/cache
 # RUN chown -R www-data:www-data /var/www/app/logs
 
-CMD ["nginx", "-g", "daemon off;"]
 CMD ["/sbin/my_init"]
+
+CMD ["nginx", "-g", "daemon off;"]
 
 EXPOSE 80
 EXPOSE 443
