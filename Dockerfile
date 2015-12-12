@@ -47,7 +47,7 @@ RUN usermod -u 1000 www-data
 # RUN chown -R www-data:www-data /var/www/app/cache
 # RUN chown -R www-data:www-data /var/www/app/logs
 
-CMD ["service nginx start", "service php5-fpm start", "/sbin/my_init"]
+CMD ["service nginx start"]
 # CMD ["nginx", "-g", "daemon off;"]
 
 EXPOSE 80
