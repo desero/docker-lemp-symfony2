@@ -38,7 +38,7 @@ RUN chmod -R 755    /var/lib/mysql/
 ADD etc/my_init.d/99_mysql_setup.sh /etc/my_init.d/99_mysql_setup.sh
 RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && echo "\ndaemon off;" >> /etc/nginx/nginx.conf
 
 VOLUME /var/www
 WORKDIR /var/www
@@ -47,8 +47,10 @@ RUN usermod -u 1000 www-data
 # RUN chown -R www-data:www-data /var/www/app/cache
 # RUN chown -R www-data:www-data /var/www/app/logs
 
-CMD ["service nginx start"]
+# CMD ["service nginx start"]
 # CMD ["nginx", "-g", "daemon off;"]
+
+CMD /sbin/my_init
 
 EXPOSE 80
 EXPOSE 443
