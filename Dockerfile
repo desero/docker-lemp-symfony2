@@ -6,7 +6,8 @@ MAINTAINER desero <desero@desero.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /root
 
-RUN apt-get update && apt-get install -y curl git nginx php5-fpm php5-cli php5-xdebug php5-gd php5-mcrypt php5-mysql php5-curl
+RUN apt-get update && apt-get install -y curl git acl nginx php5-fpm php5-cli php5-xdebug php5-gd php5-mcrypt php5-mysql php5-curl nodejs npm unzip
+RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN sed -i.bak "s@;cgi.fix_pathinfo=1@cgi.fix_pathinfo=0@g" /etc/php5/fpm/php.ini
@@ -40,6 +41,10 @@ RUN chmod +x /etc/my_init.d/99_mysql_setup.sh
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN service nginx start
 RUN service php5-fpm start
+
+RUN usermod -u 1000 www-data
+RUN chown -R www-data:www-data /var/www/app/cache
+RUN chown -R www-data:www-data /var/www/app/logs
 
 VOLUME ["/var/www", "/var/log/nginx/"]
 
