@@ -43,12 +43,11 @@ RUN service nginx start
 RUN service php5-fpm start
 
 VOLUME ["/var/www", "/var/log/nginx/"]
+CMD ["/sbin/my_init"]
 
 RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /var/www/app/cache
 RUN chown -R www-data:www-data /var/www/app/logs
-
-CMD ["/sbin/my_init"]
 
 EXPOSE 80
 EXPOSE 443
