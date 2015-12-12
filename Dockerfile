@@ -42,11 +42,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN service nginx start
 RUN service php5-fpm start
 
+VOLUME ["/var/www", "/var/log/nginx/"]
+
 RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /var/www/app/cache
 RUN chown -R www-data:www-data /var/www/app/logs
-
-VOLUME ["/var/www", "/var/log/nginx/"]
 
 CMD ["/sbin/my_init"]
 
