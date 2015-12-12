@@ -42,6 +42,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 VOLUME ["/var/www", "/var/log/nginx/"]
 
+WORKDIR /var/www
+
 RUN usermod -u 1000 www-data
 # RUN chown -R www-data:www-data /var/www/app/cache
 # RUN chown -R www-data:www-data /var/www/app/logs
